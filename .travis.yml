@@ -1,21 +1,21 @@
 language: node_js
-
 node_js:
-  - '10'
-
-sudo: false
-
-before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH="$HOME/.yarn/bin:$PATH"
-
+    - 8.11.1
 cache:
-  yarn: true
-  directories:
-    - '.eslintcache'
-    - 'node_modules'
-env:
-  - REACT_APP_DHIS2_URL_TEST=https://play.dhis2.org/2.30 REACT_APP_URL_TEST=http://localhost:9000 START_SERVER=true
-
+    directories:
+        - $HOME/.cache
+install:
+    - yarn global add @dhis2/deploy-build
+    - yarn install --frozen-lockfile
+    - yarn cy:verify
 script:
-- yarn run test:all
+    - yarn build
+    - yarn start &> /dev/null &
+    - yarn cy:stub:run
+    - kill $(jobs -p) || true
+deploy:
+    - provider: script
+      script: deploy-build
+      skip_cleanup: true
+      on:
+          all_branches: true

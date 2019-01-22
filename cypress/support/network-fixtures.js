@@ -4,10 +4,9 @@
 // TODO: Move fixture generation processing to a node.js Cypress plugin using cy.task()
 // TODO: Use EXTERNAL_API exclusively, E2E is redundant
 
-export const externalUrl =
-    Cypress.env('EXTERNAL_API') || 'http://localhost:8080';
-export const e2e = Cypress.env('E2E');
-export const generateFixtures = Cypress.env('GEN_FIXTURES');
+export const externalUrl = Cypress.env("EXTERNAL_API") || "http://localhost:8080";
+export const e2e = Cypress.env("E2E");
+export const generateFixtures = Cypress.env("GEN_FIXTURES");
 export const stubBackend = !e2e && !generateFixtures;
 
 export const stubFetch = win => {
@@ -27,25 +26,25 @@ const xhrRequestMap = {};
 const blobToText = blob =>
     new Promise(resolve => {
         const fr = new FileReader();
-        fr.addEventListener('loadend', () => {
+        fr.addEventListener("loadend", () => {
             resolve(fr.result);
         });
         fr.readAsText(blob);
     });
 
-const httpMethods = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'];
+const httpMethods = ["GET", "POST", "PUT", "PATCH", "DELETE"];
 
-const stubRequest = (url, response, method = 'GET') => {
+const stubRequest = (url, response, method = "GET") => {
     // This stubbing method is required to circumvent a Node.js 80kb header limit, so just always use it.
     // From https://github.com/cypress-io/cypress/issues/76
     return cy.route({
         url,
         method,
-        response: '',
+        response: "",
         onRequest: xhr => {
             const originalOnLoad = xhr.xhr.onload;
             xhr.xhr.onload = function() {
-                Object.defineProperty(this, 'response', {
+                Object.defineProperty(this, "response", {
                     writable: true,
                 });
                 this.response = response;
@@ -101,18 +100,18 @@ const genFixturesOnResponse = async xhr => {
     return xhr;
 };
 
-Cypress.Commands.add('startServer', collection => {
+Cypress.Commands.add("startServer", collection => {
     if (stubBackend) {
         cy.server({ force404: true });
 
         // Allow all requests to app server (usually webpack-dev-server) to pass through, all other XHR urls will generate a 404
         httpMethods.forEach(method => {
-            cy.route(method, `${Cypress.config('baseUrl')}/**`);
+            cy.route(method, `${Cypress.config("baseUrl")}/**`);
         });
 
         cy.fixture(collection).then(requestsFixture => {
             requestsFixture.requests.forEach(req => {
-                const { path, method = 'GET', response } = req;
+                const { path, method = "GET", response } = req;
 
                 if (response) {
                     stubRequest(`${externalUrl}${path}`, response, method);
@@ -130,12 +129,12 @@ Cypress.Commands.add('startServer', collection => {
     }
 });
 
-Cypress.Commands.add('saveFixtures', (collection) => {
+Cypress.Commands.add("saveFixtures", collection => {
     if (generateFixtures) {
         xhrManager.requests.forEach(req => {
             cy.wrap(req, { log: false })
-                .its('response')
-                .should('not.be', null);
+                .its("response")
+                .should("not.be", null);
         });
         cy.writeFile(`cypress/fixtures/${collection}.json`, xhrManager, {
             timeout: 30000,

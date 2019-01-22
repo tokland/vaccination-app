@@ -43,12 +43,11 @@
     "test:all": "yarn test && yarn test:integration",
     "lint": "eslint ./src",
     "eject": "react-scripts eject",
-    "prettify": "prettier \"src/**/*.{js,jsx,json,css}\" --write",
+    "prettify": "prettier \"{src,config,cypress}/**/*.{js,jsx,json,css}\" --write",
     "extract-pot": "d2-i18n-extract -p src/ -o i18n/",
     "localize": "yarn extract-pot && d2-i18n-generate -n dhis2-app-skeleton -p ./i18n/ -o ./src/locales/",
     "update-po": "yarn extract-pot && for pofile in i18n/*.po; do msgmerge --backup=off -U $pofile i18n/en.pot; done",
     "manifest": "d2-manifest package.json build/manifest.webapp",
-    "format": "code-style",
     "cy:verify": "cypress verify",
     "cy:stub:run": "cypress run",
     "cy:stub:open": "cypress open",
@@ -59,14 +58,14 @@
   },
   "husky": {
     "hooks": {
-      "_pre-commit": "yarn format && yarn extract-pot && CI=true yarn test"
+      "pre-push": "yarn extract-pot && yarn jest"
     }
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-0",
-    "@dhis2/code-style": "^1.4.0",
     "babel-core": "7.0.0-bridge.0",
     "cypress": "^3.1.4",
+    "eslint-config-prettier": "^3.6.0",
     "sinon": "^7.1.1"
   },
   "manifest.webapp": {

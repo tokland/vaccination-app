@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom'
 import { init, config, getUserSettings, getManifest } from 'd2/lib/d2'
 import 'font-awesome/css/font-awesome.min.css'
 import _ from 'lodash'
+import { BrowserRouter } from 'react-router-dom';
 
-import App from './App.component'
-import './index.css'
+import App from './components/app/App'
 import i18n from './locales'
 
 function isLangRTL(code) {
@@ -69,7 +69,9 @@ async function main() {
             credentials: 'same-origin',
         }).then(res => res.json())
         ReactDOM.render(
-            <App d2={d2} appConfig={appConfig} />,
+            <BrowserRouter>
+                <App d2={d2} appConfig={appConfig} />
+            </BrowserRouter>,
             document.getElementById('root')
         )
     } catch (err) {

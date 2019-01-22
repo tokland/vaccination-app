@@ -1,15 +1,16 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { unwrap } from '@material-ui/core/test-utils';
-import Root from '../Root.component';
-import { getD2Stub } from '../utils/testing'
 import MenuItem from '@material-ui/core/MenuItem';
 
-const _Root = unwrap(Root);
+import LandingPage from '../LandingPage';
+import { getD2Stub } from 'utils/testing'
+
+const LanginPageUnwrapped = unwrap(LandingPage);
 
 describe('Landing page', () => {
     const renderWithProps = props =>
-        shallow(<_Root d2={getD2Stub()} classes={{}} {...props} />);
+        shallow(<LanginPageUnwrapped d2={getD2Stub()} classes={{}} {...props} />);
 
     it('renders 4 menu items', () => {
         const component = renderWithProps()

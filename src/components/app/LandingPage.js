@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
     root: {
@@ -12,7 +13,7 @@ const styles = theme => ({
     },
 });
 
-class Root extends React.Component {
+class LandingPage extends React.Component {
     static propTypes = {
         d2: PropTypes.object.isRequired,
     }
@@ -34,6 +35,8 @@ class Root extends React.Component {
                 key={key}
                 data-test={`page-${key}`}
                 onClick={this.onClick.bind(this, key)}
+                component={Link}
+                to={`/${key}`}
             >
                 {title}
             </MenuItem>
@@ -51,4 +54,4 @@ class Root extends React.Component {
     }
 }
 
-export default withStyles(styles)(Root);
+export default withStyles(styles)(LandingPage);

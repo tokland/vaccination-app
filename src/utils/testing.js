@@ -2,15 +2,13 @@ import React from 'react'
 import { mount as enzymeMount } from 'enzyme'
 import fetch from 'node-fetch'
 import _ from 'lodash'
-import { init } from 'd2/lib/d2'
 import sinon from 'sinon'
-import Api from 'd2/lib/api/Api'
 import { generateUid } from 'd2/lib/uid'
 import OldMuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 
-import { muiTheme } from '../dhis2.theme'
-import SnackbarProvider from '../components/feedback/SnackbarProvider.component'
+import { muiTheme } from 'themes/dhis2.theme'
+import SnackbarProvider from 'components/feedback/SnackbarProvider'
 
 // DHIS2 expects a browser environment, add some required keys to the global node namespace
 Object.assign(global, {
@@ -22,7 +20,9 @@ export function mount(component) {
     const wrappedComponent = enzymeMount(
         <MuiThemeProvider theme={muiTheme}>
             <OldMuiThemeProvider>
-                <SnackbarProvider>{component}</SnackbarProvider>
+                <SnackbarProvider>
+                    {component}
+                </SnackbarProvider>
             </OldMuiThemeProvider>
         </MuiThemeProvider>
     )
@@ -51,11 +51,6 @@ export function getD2Stub() {
         currentUser: {},
         mocks,
     }
-}
-
-const systemAuth = {
-    username: 'system',
-    password: 'System123',
 }
 
 export function getNewUser(partialUser) {

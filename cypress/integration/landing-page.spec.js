@@ -3,12 +3,12 @@
 context('Landing page', () => {
     before(() => {
         cy.startServer('landing-page');
-    });
-
-    beforeEach(() => {
         cy.login('system', 'System123')
         cy.clock(Date.UTC(2018, 11, 16, 13, 10, 9), ['Date'])
         cy.loadPage()
+    });
+
+    beforeEach(() => {
     })
 
     after(() => {

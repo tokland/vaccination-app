@@ -33,7 +33,6 @@ Cypress.Commands.add('login', (username, password) => {
             form: true,
             log: true,
         });
-        cy.wait(1000);
     }
 });
 

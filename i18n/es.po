@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2019-01-21T12:13:33.152Z\n"
+"POT-Creation-Date: 2019-01-23T11:47:54.285Z\n"
 "PO-Revision-Date: 2018-10-25T09:02:35.143Z\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,3 +19,75 @@ msgstr "Tablero"
 
 msgid "Settings"
 msgstr "Configuración"
+
+msgid "Public view/edit"
+msgstr "Ver/editar"
+
+msgid "Public view"
+msgstr "Ver"
+
+msgid "Private"
+msgstr "Privado"
+
+msgid "Actions"
+msgstr "Acciones"
+
+msgid "of"
+msgstr "de"
+
+msgid "Name"
+msgstr "Nombre"
+
+msgid "Short name"
+msgstr "Nombre corto"
+
+msgid "Code"
+msgstr "Código"
+
+msgid "Display description"
+msgstr "Descripción"
+
+msgid "Created"
+msgstr "Fecha de creación"
+
+msgid "Last update"
+msgstr "Última actualización"
+
+msgid "Id"
+msgstr "Identificador"
+
+msgid "API link"
+msgstr "Link API"
+
+msgid "Public access"
+msgstr "Acceso público"
+
+msgid "Last updated"
+msgstr "Última actualización"
+
+msgid "Only my campaigns"
+msgstr "Solo mis campañas"
+
+msgid "Details"
+msgstr "Detalles"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Share"
+msgstr "Compartir"
+
+msgid "Delete"
+msgstr "Eliminar"
+
+msgid "Go to Data Entry"
+msgstr "Ir a entrada de datos"
+
+msgid "Go to Dashboard"
+msgstr "Ir a tablero"
+
+msgid "Download data"
+msgstr "Descargar datos"
+
+msgid "Search by name"
+msgstr "Buscar por nombre"

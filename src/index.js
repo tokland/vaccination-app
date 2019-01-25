@@ -13,7 +13,7 @@ function isLangRTL(code) {
     const prefixed = langs.map(c => `${c}-`)
     return (
         langs.includes(code) ||
-        prefixed.filter(c => code.startsWith(c)).length > 0
+        prefixed.filter(c => code && code.startsWith(c)).length > 0
     )
 }
 

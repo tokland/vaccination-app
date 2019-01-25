@@ -1,7 +1,7 @@
 import React from "react";
 import { mount as enzymeMount } from "enzyme";
 import fetch from "node-fetch";
-import _ from "lodash";
+import _ from "./lodash";
 import sinon from "sinon";
 import { generateUid } from "d2/lib/uid";
 import OldMuiThemeProvider from "material-ui/styles/MuiThemeProvider";
@@ -9,6 +9,7 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 
 import { muiTheme } from "themes/dhis2.theme";
 import SnackbarProvider from "components/feedback/SnackbarProvider";
+import { get } from "../models/DataSets";
 
 // DHIS2 expects a browser environment, add some required keys to the global node namespace
 Object.assign(global, {
@@ -38,17 +39,24 @@ const mocks = {
     },
 };
 
-export function getD2Stub() {
-    return {
-        Api: {
-            getApi: () => mocks.api,
+export function getD2Stub(partialD2 = {}) {
+    return _.deepMerge(
+        {
+            Api: {
+                getApi: () => mocks.api,
+            },
+            system: {
+                systemInfo: {},
+            },
+            currentUser: {
+                id: "M5zQapPyTZI",
+                displayName: "John Traore",
+            },
+            mocks,
+            models: {},
         },
-        system: {
-            systemInfo: {},
-        },
-        currentUser: {},
-        mocks,
-    };
+        partialD2
+    );
 }
 
 export function getNewUser(partialUser) {

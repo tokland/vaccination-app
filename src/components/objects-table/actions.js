@@ -1,10 +1,13 @@
-import {canManage, canDelete, canUpdate} from 'utils/auth';
-import _ from 'utils/lodash';
-import i18n from '@dhis2/d2-i18n';
+import { canManage, canDelete, canUpdate } from "utils/auth";
+import _ from "utils/lodash";
+import i18n from "@dhis2/d2-i18n";
 
 const setupActions = (onClick, actions) => {
     const actionsByName = _.keyBy(actions, "name");
-    const contextMenuIcons = _(actions).map(a => [a.name, a.icon || a.name]).fromPairs().value();
+    const contextMenuIcons = _(actions)
+        .map(a => [a.name, a.icon || a.name])
+        .fromPairs()
+        .value();
 
     const isContextActionAllowed = function(d2, selection, actionName) {
         const action = actionsByName[actionName];
@@ -21,58 +24,57 @@ const setupActions = (onClick, actions) => {
         }
     };
 
-    const contextActions = actions
-        .map(action => {
-            const handler = (data) => {
-                const arg = action.multiple && !_.isArray(data) ? [data] : data;
-                onClick(action.name, arg);
-            };
-            return {name: action.name, text: action.text, fn: handler};
-        });
+    const contextActions = actions.map(action => {
+        const handler = data => {
+            const arg = action.multiple && !_.isArray(data) ? [data] : data;
+            onClick(action.name, arg);
+        };
+        return { name: action.name, text: action.text, fn: handler };
+    });
 
-    return {contextActions, contextMenuIcons, isContextActionAllowed};
+    return { contextActions, contextMenuIcons, isContextActionAllowed };
 };
 
 export function get(onClick) {
     return setupActions(onClick, [
         {
-            name: 'details',
-            text: i18n.t('Details'),
+            name: "details",
+            text: i18n.t("Details"),
             multiple: false,
         },
         {
-            name: 'edit',
-            text: i18n.t('Edit'),
+            name: "edit",
+            text: i18n.t("Edit"),
             multiple: false,
             isActive: (d2, dataset) => canUpdate(d2, [dataset]),
         },
         {
-            name: 'share',
-            text: i18n.t('Share'),
+            name: "share",
+            text: i18n.t("Share"),
             multiple: true,
             isActive: canManage,
         },
         {
-            name: 'delete',
-            text: i18n.t('Delete'),
+            name: "delete",
+            text: i18n.t("Delete"),
             multiple: true,
             isActive: canDelete,
         },
         {
-            name: 'dataEntry',
-            icon: 'library_books',
-            text: i18n.t('Go to Data Entry'),
+            name: "dataEntry",
+            icon: "library_books",
+            text: i18n.t("Go to Data Entry"),
             multiple: false,
         },
         {
-            name: 'dashboard',
-            text: i18n.t('Go to Dashboard'),
+            name: "dashboard",
+            text: i18n.t("Go to Dashboard"),
             multiple: false,
         },
         {
-            name: 'download',
-            icon: 'cloud_download',
-            text: i18n.t('Download data'),
+            name: "download",
+            icon: "cloud_download",
+            text: i18n.t("Download data"),
             multiple: false,
         },
     ]);

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2019-01-23T11:47:54.285Z\n"
+"POT-Creation-Date: 2019-01-25T07:47:23.977Z\n"
 "PO-Revision-Date: 2018-10-25T09:02:35.143Z\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,10 +20,10 @@ msgstr "Tablero"
 msgid "Settings"
 msgstr "Configuración"
 
-msgid "Public view/edit"
+msgid "View/edit"
 msgstr "Ver/editar"
 
-msgid "Public view"
+msgid "View only"
 msgstr "Ver"
 
 msgid "Private"

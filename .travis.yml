@@ -1,21 +1,17 @@
 language: node_js
-
 node_js:
-  - '10'
-
-sudo: false
-
-before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH="$HOME/.yarn/bin:$PATH"
-
+    - 8.10.0
 cache:
-  yarn: true
-  directories:
-    - '.eslintcache'
-    - 'node_modules'
-env:
-  - CYPRESS_EXTERNAL_API=https://play.dhis2.org/2.30 CYPRESS_ROOT_URL=http://localhost:8081
-
+    directories:
+        - $HOME/.cache
+install:
+    - yarn install --frozen-lockfile
+    - yarn cy:verify
 script:
-- yarn cy:stub:run
+    - port=8081
+    - dhis2_url=https://play.dhis2.org/2.30
+    - yarn build
+    - PORT=$port REACT_APP_DHIS2_URL="$dhis2_url" yarn start &
+    - yarn run wait-on http://localhost:$port
+    - CYPRESS_EXTERNAL_API=$dhis2_url CYPRESS_ROOT_URL=http://localhost:$port yarn cy:e2e:run
+    - kill $(jobs -p) || true

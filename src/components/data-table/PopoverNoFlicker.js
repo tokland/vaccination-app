@@ -1,7 +1,7 @@
-import React from 'react';
-import Paper from 'material-ui/Paper';
-import Popover from 'material-ui/Popover';
-import PopoverAnimationDefault from 'material-ui/Popover/PopoverAnimationDefault'
+import React from "react";
+import Paper from "material-ui/Paper";
+import Popover from "material-ui/Popover";
+import PopoverAnimationDefault from "material-ui/Popover/PopoverAnimationDefault";
 
 // See https://github.com/mui-org/material-ui/issues/8040
 
@@ -21,29 +21,29 @@ class PopoverNoFlicker extends Popover {
             useLayerForClickAway, // eslint-disable-line no-unused-vars
             scrollableContainer, // eslint-disable-line no-unused-vars
             ...other
-        } = this.props
+        } = this.props;
 
         let styleRoot = style;
 
         if (!animated) {
             styleRoot = {
-                position: 'fixed',
+                position: "fixed",
                 zIndex: this.context.muiTheme.zIndex.popover,
-                opacity: this.state.setPlacement ? 1 : 0,  // EDIT
-            }
+                opacity: this.state.setPlacement ? 1 : 0, // EDIT
+            };
 
             if (!this.state.open) {
-                return null
+                return null;
             }
 
             return (
                 <Paper style={Object.assign(styleRoot, style)} {...other}>
                     {children}
                 </Paper>
-            )
+            );
         }
 
-        const Animation = animation || PopoverAnimationDefault
+        const Animation = animation || PopoverAnimationDefault;
 
         return (
             <Animation
@@ -54,44 +54,51 @@ class PopoverNoFlicker extends Popover {
             >
                 {children}
             </Animation>
-        )
-    }
+        );
+    };
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.open === this.props.open) {
-            return
+            return;
         }
 
         if (nextProps.open) {
-            clearTimeout(this.timeout)
-            this.timeout = null
-            this.anchorEl = nextProps.anchorEl || this.props.anchorEl
-            this.setState({
-                open: true,
-                closing: false,
-                setPlacement: false,
-            }, () => { // EDIT
-                setTimeout(() => {
-                    this.setState({
-                        setPlacement: true,
-                    })
-                })
-            })
+            clearTimeout(this.timeout);
+            this.timeout = null;
+            this.anchorEl = nextProps.anchorEl || this.props.anchorEl;
+            this.setState(
+                {
+                    open: true,
+                    closing: false,
+                    setPlacement: false,
+                },
+                () => {
+                    // EDIT
+                    setTimeout(() => {
+                        this.setState({
+                            setPlacement: true,
+                        });
+                    });
+                }
+            );
         } else {
             if (nextProps.animated) {
-                if (this.timeout !== null) return
-                this.setState({ closing: true })
+                if (this.timeout !== null) return;
+                this.setState({ closing: true });
                 this.timeout = setTimeout(() => {
-                    this.setState({
-                        open: false,
-                    }, () => {
-                        this.timeout = null
-                    })
-                }, 500)
+                    this.setState(
+                        {
+                            open: false,
+                        },
+                        () => {
+                            this.timeout = null;
+                        }
+                    );
+                }, 500);
             } else {
                 this.setState({
                     open: false,
-                })
+                });
             }
         }
     }

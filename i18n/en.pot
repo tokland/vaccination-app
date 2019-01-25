@@ -5,11 +5,89 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-11-15T11:18:10.896Z\n"
-"PO-Revision-Date: 2018-11-15T11:18:10.896Z\n"
+"POT-Creation-Date: 2019-01-25T07:47:23.977Z\n"
+"PO-Revision-Date: 2019-01-25T07:47:23.977Z\n"
 
-msgid "Hello there"
+msgid "Campaign Configurator"
 msgstr ""
 
-msgid "Click to show feedback"
+msgid "Data Entry"
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "View/edit"
+msgstr ""
+
+msgid "View only"
+msgstr ""
+
+msgid "Private"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "of"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Short name"
+msgstr ""
+
+msgid "Code"
+msgstr ""
+
+msgid "Display description"
+msgstr ""
+
+msgid "Created"
+msgstr ""
+
+msgid "Last update"
+msgstr ""
+
+msgid "Id"
+msgstr ""
+
+msgid "API link"
+msgstr ""
+
+msgid "Public access"
+msgstr ""
+
+msgid "Last updated"
+msgstr ""
+
+msgid "Only my campaigns"
+msgstr ""
+
+msgid "Details"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Share"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Go to Data Entry"
+msgstr ""
+
+msgid "Go to Dashboard"
+msgstr ""
+
+msgid "Download data"
+msgstr ""
+
+msgid "Search by name"
 msgstr ""

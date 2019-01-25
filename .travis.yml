@@ -8,10 +8,8 @@ install:
     - yarn install --frozen-lockfile
     - yarn cy:verify
 script:
-    - port=8081
-    - dhis2_url=https://play.dhis2.org/2.30
     - yarn build
-    - PORT=$port REACT_APP_DHIS2_URL="$dhis2_url" yarn start &
-    - yarn run wait-on http://localhost:$port
-    - CYPRESS_EXTERNAL_API=$dhis2_url CYPRESS_ROOT_URL=http://localhost:$port yarn cy:e2e:run
+    - PORT=8081 REACT_APP_DHIS2_URL="$dhis2_url" yarn start &
+    - yarn run wait-on http://localhost:8081
+    - CYPRESS_EXTERNAL_API=https://play.dhis2.org/2.30 CYPRESS_ROOT_URL=http://localhost:$port yarn cy:e2e:run
     - kill $(jobs -p) || true

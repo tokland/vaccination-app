@@ -5,13 +5,13 @@ cache:
     directories:
         - $HOME/.cache
 install:
-    - yarn global add @dhis2/deploy-build
     - yarn install --frozen-lockfile
     - yarn cy:verify
 script:
     - yarn build
-    - yarn start &> /dev/null &
-    - yarn cy:stub:run
+    - PORT=8081 REACT_APP_DHIS2_URL="https://play.dhis2.org/2.30" yarn start &
+    - yarn run wait-on http://localhost:8081
+    - CYPRESS_EXTERNAL_API=https://play.dhis2.org/2.30 CYPRESS_ROOT_URL=http://localhost:8081 yarn cy:e2e:run
     - kill $(jobs -p) || true
 deploy:
     - provider: script

@@ -1,23 +1,25 @@
 {
-  "name": "dhis2-app-skeleton",
-  "description": "DHIS2 App Skeleton",
+  "name": "vaccination-app",
+  "description": "DHIS2 Vaccination",
   "version": "0.0.1",
   "license": "GPL-3.0",
   "author": "EyeSeeTea team",
   "homepage": "./",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eyeseetea/dhis2-app-skeleton.git"
+    "url": "git+https://github.com/eyeseetea/vaccination-app.git"
   },
   "dependencies": {
     "@dhis2/d2-i18n": "^1.0.4",
     "@dhis2/d2-i18n-extract": "^1.0.7",
     "@dhis2/d2-i18n-generate": "^1.0.19",
     "@dhis2/d2-ui-core": "^1.3.5",
-    "@dhis2/d2-ui-header-bar": "^1.1.10",
-    "@material-ui/core": "^3.3.1",
+    "@dhis2/d2-ui-header-bar": "^5.1.0",
+    "@dhis2/d2-ui-org-unit-dialog": "^5.1.0",
+    "@dhis2/d2-ui-org-unit-select": "^5.1.0",
+    "@material-ui/core": "^3.9.1",
     "@material-ui/icons": "^3.0.1",
-    "d2": "^30.0.2",
+    "d2": "^31.1.1",
     "d2-manifest": "^1.0.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
@@ -33,8 +35,9 @@
     "postcss-rtl": "^1.3.2",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
+    "react-jss": "^8.6.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.0.5",
+    "react-scripts": "2.0.6-next.c662dfb0",
     "throttle-debounce": "^2.1.0"
   },
   "scripts": {
@@ -50,7 +53,7 @@
     "eject": "react-scripts eject",
     "prettify": "prettier \"{src,config,cypress}/**/*.{js,jsx,json,css}\" --write",
     "extract-pot": "d2-i18n-extract -p src/ -o i18n/",
-    "localize": "yarn extract-pot && d2-i18n-generate -n dhis2-app-skeleton -p ./i18n/ -o ./src/locales/",
+    "localize": "yarn extract-pot && d2-i18n-generate -n vaccination-app -p ./i18n/ -o ./src/locales/",
     "update-po": "yarn extract-pot && for pofile in i18n/*.po; do msgmerge --backup=off -U $pofile i18n/en.pot; done",
     "manifest": "d2-manifest package.json build/manifest.webapp",
     "cy:verify": "cypress verify",
@@ -68,16 +71,21 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-0",
+    "@types/jest": "^23.3.13",
+    "@types/node": "^10.12.19",
+    "@types/react": "^16.7.22",
+    "@types/react-dom": "^16.0.11",
     "babel-core": "7.0.0-bridge.0",
     "cypress": "^3.1.4",
     "eslint": "^5.12.1",
     "eslint-config-prettier": "^3.6.0",
     "sinon": "^7.1.1",
+    "typescript": "^3.2.4",
     "wait-on": "^3.2.0"
   },
   "manifest.webapp": {
-    "name": "dhis2-app-skeleton",
-    "description": "DHIS2 Skeleton App",
+    "name": "vaccination-app",
+    "description": "DHIS2 Vaccination",
     "icons": {
       "48": "icon.png"
     },

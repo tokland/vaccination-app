@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-01-25T07:47:23.977Z\n"
-"PO-Revision-Date: 2019-01-25T07:47:23.977Z\n"
+"POT-Creation-Date: 2019-01-30T08:18:43.427Z\n"
+"PO-Revision-Date: 2019-01-30T08:18:43.427Z\n"
 
 msgid "Campaign Configurator"
 msgstr ""
@@ -18,6 +18,18 @@ msgid "Dashboard"
 msgstr ""
 
 msgid "Settings"
+msgstr ""
+
+msgid "Organisation Units"
+msgstr ""
+
+msgid "General Info"
+msgstr ""
+
+msgid "New vaccination campaign"
+msgstr ""
+
+msgid "Back"
 msgstr ""
 
 msgid "View/edit"
@@ -90,4 +102,37 @@ msgid "Download data"
 msgstr ""
 
 msgid "Search by name"
+msgstr ""
+
+msgid "Previous"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "Search apps"
+msgstr ""
+
+msgid "Manage my apps"
+msgstr ""
+
+msgid "No results found"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Unselect"
+msgstr ""
+
+msgid "Select all"
+msgstr ""
+
+msgid "Unselect all"
+msgstr ""
+
+msgid "Organisation Unit Level"
+msgstr ""
+
+msgid "Organisation Unit Group"
 msgstr ""

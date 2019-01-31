@@ -26,7 +26,7 @@ class LandingPage extends React.Component {
     render() {
         const { classes } = this.props;
         const items = [
-            ["campaign-configurator", i18n.t("Campaign Configurator")],
+            ["campaign-configurator", i18n.t("Campaign Configurator"), "edit"],
             ["data-entry", i18n.t("Data Entry"), "library_books"],
             ["dashboard", i18n.t("Dashboard"), "dashboard"],
             ["maintenance", i18n.t("Maintenance"), "settings"],

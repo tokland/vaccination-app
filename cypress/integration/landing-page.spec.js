@@ -22,6 +22,6 @@ context("Landing page", () => {
         cy.contains("Campaign Configurator");
         cy.contains("Data Entry");
         cy.contains("Dashboard");
-        cy.contains("Settings");
+        cy.contains("Maintenance");
     });
 });

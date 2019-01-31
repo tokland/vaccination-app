@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 import Paper from "@material-ui/core/Paper";
+import FontIcon from "material-ui/FontIcon";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import { withStyles } from "@material-ui/core/styles";
@@ -26,11 +27,11 @@ class LandingPage extends React.Component {
         const { classes } = this.props;
         const items = [
             ["campaign-configurator", i18n.t("Campaign Configurator")],
-            ["data-entry", i18n.t("Data Entry")],
-            ["dashboard", i18n.t("Dashboard")],
-            ["settings", i18n.t("Settings")],
+            ["data-entry", i18n.t("Data Entry"), "library_books"],
+            ["dashboard", i18n.t("Dashboard"), "dashboard"],
+            ["maintenance", i18n.t("Maintenance"), "settings"],
         ];
-        const menuItems = items.map(([key, title]) => (
+        const menuItems = items.map(([key, title, icon]) => (
             <MenuItem
                 key={key}
                 data-test={`page-${key}`}
@@ -38,6 +39,7 @@ class LandingPage extends React.Component {
                 component={Link}
                 to={`/${key}`}
             >
+                <FontIcon className="material-icons">{icon}</FontIcon>
                 {title}
             </MenuItem>
         ));

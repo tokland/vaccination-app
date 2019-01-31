@@ -1,33 +1,27 @@
-/// <reference types='Cypress' />
+/// <reference types="Cypress" />
 
-context('Landing page', () => {
+context("Landing page", () => {
     before(() => {
-        cy.login('system', 'System123')
-        cy.loadPage()
+        cy.login("admin", "district");
+        cy.loadPage();
     });
 
     beforeEach(() => {
-    })
+        cy.login("admin", "district");
+    });
 
-    it('loads', () => {
-        cy.title().should('equal', 'Vaccination App')
-    })
+    it("has page title", () => {
+        cy.title().should("equal", "Vaccination App");
+    });
 
-    it('shows 4 pages', () => {
+    it("shows 4 pages of the application", () => {
         cy.get('[data-test="pages"]')
-            .should('have.length', 1)
-            .should('be.visible')
+            .should("have.length", 1)
+            .should("be.visible");
 
-        cy.get('[data-test="page-campaign-configurator"]')
-            .should('have.length', 1)
-
-        cy.get('[data-test="page-data-entry"]')
-            .should('have.length', 1)
-
-        cy.get('[data-test="page-dashboard"]')
-            .should('have.length', 1)
-
-        cy.get('[data-test="page-settings"]')
-            .should('have.length', 1)
-    })
-})
+        cy.contains("Campaign Configurator");
+        cy.contains("Data Entry");
+        cy.contains("Dashboard");
+        cy.contains("Maintenance");
+    });
+});

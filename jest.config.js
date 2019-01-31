@@ -3,9 +3,10 @@ module.exports = {
     collectCoverageFrom: ['src/**/*.js'],
     testPathIgnorePatterns: ['/node_modules/', '/cypress'],
     transformIgnorePatterns: ['/node_modules/(?!d2-ui).+\\.js$'],
+    modulePaths: ['src'],
     moduleNameMapper: {
-        '\\.(css)$': '<rootDir>/config/styleMock.js',
-        "\\.(jpg|jpeg|png|svg)$": '<rootDir>/config/fileMock.js',
+        '\\.(css|scss)$': '<rootDir>/config/styleMock.js',
+        '\\.(jpg|jpeg|png|svg)$': '<rootDir>/config/fileMock.js',
     },
     testEnvironment: 'jsdom',
     globals: {

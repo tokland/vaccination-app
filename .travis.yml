@@ -1,21 +1,20 @@
 language: node_js
-
 node_js:
-  - '10'
-
-sudo: false
-
-before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH="$HOME/.yarn/bin:$PATH"
-
+- 8.10.0
 cache:
-  yarn: true
   directories:
-    - '.eslintcache'
-    - 'node_modules'
-env:
-  - REACT_APP_DHIS2_URL_TEST=https://play.dhis2.org/2.30 REACT_APP_URL_TEST=http://localhost:9000 START_SERVER=true
-
+  - "$HOME/.cache"
+install:
+- yarn install --frozen-lockfile
+- yarn cy:verify
 script:
-- yarn run test:all
+- port=8081
+- dhis2_url=https://play.dhis2.org/2.30
+- yarn build
+- PORT=$port REACT_APP_DHIS2_URL="$dhis2_url" yarn start &
+- yarn run wait-on http://localhost:$port
+- CYPRESS_EXTERNAL_API=$dhis2_url CYPRESS_ROOT_URL=http://localhost:$port yarn cy:e2e:run
+- kill $(jobs -p) || true
+notifications:
+  slack:
+    secure: M1d8Xkw7PRULohfhArw1CKAvjjvGsOv7SdzbZ7HiXqJm8UGgC0MvNMx+7+CmyMNAQBhXhUCf8bIthpR0QQcHIywXlTMMGwfu+AalkLSWkm6rQ28GVIZpy52vqmvjNThZnwWZO9gIZvChIQ4bvr3odKWXbDdCLZ5sybjih+hTPekB4Pgii3h5fYm6PjV6DANtCvChkBV21DvLd0x3q0CydnlcQzst6NbmJpZUS0fgnLaNhTX79wuWZDWwF5cZXuIzdhH4ff8eJVYpkuK7NzTPYntOwuoeXJdvXoZIvCrnf1jvfRXnr7wJUKBA9v0Lnpu0+bboHziNxJfg8VzdUVV049XkcwbtF6gSFMGt/oz488kYVi6rwmn3Jk8F9kmZaKWdVtJibyV0cSjE5fyWtOXWBYFi4BfrzVa4hqEYwdqdK9qgI9XbTgAvj5q1wg+jol70CUil6+XzdMMOFEXx9uXGziuuA8bVgmFqxI6d4AnvXVi/sHpAlMP5zEZfPnHAKOSK7T6hi0LeJ/ZHmZyg01V3ZAW5vBBSXyhWrRcU0KOyjCei74XAxZlc0inpjqZOForBKjqZ3GUs2pcKy7Cdxp71J8M5LEEUiICHjBjpmgUXPegXZhSc77V3SATOspck83Jci4SDrCFZ6CscB4uxIRM47VElX4Y5J3FoLLt1Jq4CKEU=

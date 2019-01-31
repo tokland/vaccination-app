@@ -1,4 +1,4 @@
-/// <reference types='Cypress' />
+/// <reference types="Cypress" />
 
 context("Landing page", () => {
     before(() => {

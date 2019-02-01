@@ -5,30 +5,34 @@ import { withRouter } from "react-router";
 import _ from 'lodash';
 
 import Wizard from "../wizard/Wizard";
-import OrganisationUnits from 'components/steps/organisation-units/OrganisationUnits';
 import FormHeading from './FormHeading';
-import Campaign from "../../models/campaign";
-import DbD2 from "../../models/db-d2";
+import Campaign from "models/campaign";
+import DbD2 from "models/db-d2";
+import OrganisationUnitsStep from "../steps/organisation-units/OrganisationUnitsStep";
+import SaveStep from "../steps/save/SaveStep";
 
 const stepsBaseInfo = [
     {
         key: "organisation-units",
         label: i18n.t("Organisation Units"),
-        component: OrganisationUnits,
+        component: OrganisationUnitsStep,
         validationKeys: ["organisationUnits"]
     },
     {
-        key: "general-info",
-        label: i18n.t("General Info"),
-        component: OrganisationUnits,
+        key: "save",
+        label: i18n.t("Save"),
+        component: SaveStep,
         validationKeys: []
     },
 ];
 
+const translations = {
+    no_organisation_units_selected: i18n.t("Select at least one organisation unit"),
+}
+
 class CampaignWizard extends React.Component {
     static propTypes = {
         d2: PropTypes.object.isRequired,
-        //campaign: PropTypes.object.isRequired,
         history: PropTypes.object.isRequired,
     };
 
@@ -37,7 +41,6 @@ class CampaignWizard extends React.Component {
         this.state = {
             campaign: Campaign.create(new DbD2(props.d2)),
         };
-        window.campaign = this.state.campaign;
     }
 
     goToList = () => {
@@ -45,12 +48,17 @@ class CampaignWizard extends React.Component {
     }
 
     onChange = (campaign) => {
+        window.campaign = campaign;
         this.setState({campaign});
     }
 
-    onStepChangeRequest = (currentStep, nextStep) => {
+    onStepChangeRequest = (currentStep) => {
         const validationObj = this.state.campaign.validate();
-        const messages = _(validationObj).at(currentStep.validationKeys).compact().value();
+        const messages = _(validationObj)
+            .at(currentStep.validationKeys)
+            .compact()
+            .map(s => i18n.t(translations[s]) || s)
+            .value();
         return {valid: _(messages).isEmpty(), messages};
     }
 
@@ -77,6 +85,8 @@ class CampaignWizard extends React.Component {
                 <Wizard
                     steps={steps}
                     initialStepKey="organisation-units"
+                    //initialStepKey="save"
+                    useSnackFeedback={true}
                     onStepChangeRequest={this.onStepChangeRequest}
                 />
             </div>

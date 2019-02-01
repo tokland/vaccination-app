@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-01-30T08:18:43.427Z\n"
-"PO-Revision-Date: 2019-01-30T08:18:43.427Z\n"
+"POT-Creation-Date: 2019-02-01T10:54:20.183Z\n"
+"PO-Revision-Date: 2019-02-01T10:54:20.184Z\n"
 
 msgid "Campaign Configurator"
 msgstr ""
@@ -23,7 +23,10 @@ msgstr ""
 msgid "Organisation Units"
 msgstr ""
 
-msgid "General Info"
+msgid "Save"
+msgstr ""
+
+msgid "Select at least one organisation unit"
 msgstr ""
 
 msgid "New vaccination campaign"
@@ -101,7 +104,30 @@ msgstr ""
 msgid "Download data"
 msgstr ""
 
+msgid "For organisation units within"
+msgstr ""
+
+msgid "For all organisation units"
+msgstr ""
+
 msgid "Search by name"
+msgstr ""
+
+msgid "Only organisation units of level {{levels}} can be selected"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "[None]"
+msgstr ""
+
+msgid "{{names}} and {{othersCount}} other(s)"
+msgstr ""
+
+msgid ""
+"The campaign vaccination setup is finished. Press the button Save to save "
+"the data"
 msgstr ""
 
 msgid "Previous"

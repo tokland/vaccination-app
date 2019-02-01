@@ -11,5 +11,5 @@ install:
 script:
     - PORT=8081 REACT_APP_DHIS2_URL=https://play.dhis2.org/2.30 yarn start &
     - yarn run wait-on http://localhost:8081 && sleep 10s
-    - CYPRESS_EXTERNAL_API=https://play.dhis2.org/2.30 CYPRESS_ROOT_URL=http://localhost:8081 yarn cy:e2e:run
+    - CYPRESS_EXTERNAL_API=http://dev.eyeseetea.com:8082 CYPRESS_ROOT_URL=http://localhost:8081 yarn cy:e2e:run
     - kill $(jobs -p) || true

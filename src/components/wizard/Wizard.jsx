@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import _ from 'lodash';
+import memoize from 'nano-memoize';
+import i18n from "@dhis2/d2-i18n";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
+import StepButton from '@material-ui/core/StepButton';
 import Button from '@material-ui/core/Button';
-import i18n from "@dhis2/d2-i18n";
-import _ from 'lodash';
+import { withFeedback, levels } from '../feedback';
 
 const styles = theme => ({
     root: {
@@ -16,6 +18,7 @@ const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
         marginRight: 30,
+        padding: 10,
     },
     buttonDisabled: {
         color: "grey !important",
@@ -23,6 +26,14 @@ const styles = theme => ({
     contents: {
         margin: 10,
         padding: 10,
+    },
+    messages: {
+        padding: 0,
+        listStyleType: "none",
+        color: "red",
+    },
+    current: {
+        //backgroundColor: "#EEE",
     },
 });
 
@@ -35,6 +46,8 @@ class Wizard extends React.Component {
     static propTypes = {
         initialStepKey: PropTypes.string.isRequired,
         onStepChangeRequest: PropTypes.func.isRequired,
+        useSnackFeedback: PropTypes.bool,
+        feedback: PropTypes.func,
         steps: PropTypes.arrayOf(PropTypes.shape({
             key: PropTypes.string.isRequired,
             label: PropTypes.string.isRequired,
@@ -42,6 +55,9 @@ class Wizard extends React.Component {
         })).isRequired,
     }
 
+    static defaultProps = {
+        useSnackFeedback: false,
+    };
 
     getAdjacentSteps = () => {
         const { steps } = this.props;
@@ -61,60 +77,89 @@ class Wizard extends React.Component {
         const stepChangeResponse = this.props.onStepChangeRequest(currentStep, nextStep);
 
         if (stepChangeResponse.valid) {
-            this.setState({ currentStepKey: nextStepKey})
+            this.setStep(nextStepKey);
         } else {
-            this.setState({ messages: stepChangeResponse.messages })
+            if (this.props.useSnackFeedback) {
+                this.props.feedback(levels.ERROR, stepChangeResponse.messages.join("\n"))
+            } else {
+                this.setState({ messages: stepChangeResponse.messages })
+            }
         }
     }
 
     prevStep = () => {
         const {prevStepKey} = this.getAdjacentSteps();
-        this.setState({ currentStepKey: prevStepKey})
+        this.setStep(prevStepKey);
     }
 
-    renderNaviagationButton(stepKey, onStepClicked, label) {
+    renderNavigationButton({stepKey, onClick, label}) {
         return (
             <Button
                 variant="contained"
                 classes={{disabled: this.props.classes.buttonDisabled}}
                 disabled={!stepKey}
                 className={this.props.classes.button}
-                onClick={onStepClicked}
+                onClick={onClick}
             >
                 {label}
             </Button>
         );
     }
 
+    setStep = (stepKey) => {
+        this.setState({ currentStepKey: stepKey, messages: [] })
+    }
+
+    onStepClicked = memoize((stepKey) => () => {
+        this.setStep(stepKey);
+    });
+
     render() {
-        const { classes, steps } = this.props;
+        const { classes, steps, useSnackFeedback } = this.props;
         const { currentStepKey, messages } = this.state;
         const index = _(steps).findIndex(step => step.key === currentStepKey);
         const currentStepIndex = index >= 0 ? index : 0;
         const currentStep = steps[currentStepIndex];
         const {prevStepKey, nextStepKey} = this.getAdjacentSteps();
+        const NavigationButton = this.renderNavigationButton.bind(this);
 
         return (
             <div className={classes.root}>
-                <Stepper activeStep={currentStepIndex}>
+                <Stepper nonLinear={false} activeStep={currentStepIndex}>
                     {steps.map(step =>
                         <Step key={step.key}>
-                            <StepLabel>
+                            <StepButton
+                                key={step.key}
+                                className={currentStep === step ? classes.current : ""}
+                                data-test-current={currentStep === step}
+                                onClick={(this.onStepClicked(step.key))}
+                            >
                                 {step.label}
-                            </StepLabel>
+                            </StepButton>
                         </Step>
                     )}
                 </Stepper>
 
                 <div>
-                    {this.renderNaviagationButton(prevStepKey, this.prevStep, i18n.t("Previous"))}
-                    {this.renderNaviagationButton(nextStepKey, this.nextStep, i18n.t("Next"))}
+                    <NavigationButton
+                        stepKey={prevStepKey}
+                        onClick={this.prevStep}
+                        label={"← " + i18n.t("Previous")}
+                    />
+
+                    <NavigationButton
+                        stepKey={nextStepKey}
+                        onClick={this.nextStep}
+                        label={i18n.t("Next") + " →"}
+                    />
                 </div>
 
-                {messages.length > 0 &&
-                    <div className="feedback">
-                        <ul>
-                            {messages.map((message, index) => (<li key={index}>{message}</li>))}
+                {!useSnackFeedback && messages.length > 0 &&
+                    <div className="messages">
+                        <ul className={classes.messages}>
+                            {messages.map((message, index) => (
+                                <li key={index}>{message}</li>
+                            ))}
                         </ul>
                     </div>
                 }
@@ -127,4 +172,4 @@ class Wizard extends React.Component {
     }
 }
 
-export default withStyles(styles)(Wizard);
+export default withFeedback(withStyles(styles)(Wizard));

@@ -29,6 +29,7 @@ class ListActionBar extends React.Component {
                     className={classes.fab}
                     size="large"
                     onClick={onClick}
+                    data-test="create-campaign"
                 >
                     <AddIcon />
                 </Fab>

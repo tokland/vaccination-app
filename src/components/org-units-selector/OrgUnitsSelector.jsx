@@ -1,56 +1,60 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import Card from 'material-ui/Card/Card';
-import CardText from 'material-ui/Card/CardText';
+import Card from "material-ui/Card/Card";
+import CardText from "material-ui/Card/CardText";
 
 import i18n from "@dhis2/d2-i18n";
-import { OrgUnitTree } from '@dhis2/d2-ui-org-unit-tree';
-import { OrgUnitSelectByLevel } from '@dhis2/d2-ui-org-unit-select';
-import { OrgUnitSelectByGroup } from '@dhis2/d2-ui-org-unit-select';
-import { OrgUnitSelectAll } from '@dhis2/d2-ui-org-unit-select';
+import { OrgUnitTree } from "@dhis2/d2-ui-org-unit-tree";
+import { OrgUnitSelectByLevel } from "@dhis2/d2-ui-org-unit-select";
+import { OrgUnitSelectByGroup } from "@dhis2/d2-ui-org-unit-select";
+import { OrgUnitSelectAll } from "@dhis2/d2-ui-org-unit-select";
 
-import { mergeChildren, incrementMemberCount, decrementMemberCount } from '@dhis2/d2-ui-org-unit-tree';
+import {
+    mergeChildren,
+    incrementMemberCount,
+    decrementMemberCount,
+} from "@dhis2/d2-ui-org-unit-tree";
 
 // Base code from d2-ui/examples/create-react-app/src/components/org-unit-selector.js
 
 const styles = {
     card: {
-        display: 'inline-block',
+        display: "inline-block",
         margin: 16,
         width: 610,
-        transition: 'all 175ms ease-out',
+        transition: "all 175ms ease-out",
     },
     cardText: {
         paddingTop: 10,
         height: 420,
-        position: 'relative',
+        position: "relative",
     },
     cardHeader: {
-        padding: '16px',
-        margin: '16px -16px',
-        borderBottom: '1px solid #eeeeee',
+        padding: "16px",
+        margin: "16px -16px",
+        borderBottom: "1px solid #eeeeee",
     },
     left: {
-        display: 'inline-block',
-        position: 'absolute',
+        display: "inline-block",
+        position: "absolute",
         height: 350,
         width: 500,
-        overflowY: 'scroll',
+        overflowY: "scroll",
         marginBottom: 16,
     },
     right: {
-        display: 'inline-block',
-        position: 'absolute',
+        display: "inline-block",
+        position: "absolute",
         width: 500,
         right: 16,
     },
     ouLabel: {
-        background: 'rgba(0,0,0,0.05)',
+        background: "rgba(0,0,0,0.05)",
         borderRadius: 5,
-        border: '1px solid rgba(0,0,0,0.1)',
-        padding: '1px 6px 1px 3px',
-        fontStyle: 'italic',
+        border: "1px solid rgba(0,0,0,0.1)",
+        padding: "1px 6px 1px 3px",
+        fontStyle: "italic",
     },
 };
 styles.cardWide = Object.assign({}, styles.card, {
@@ -78,25 +82,24 @@ export default class OrgUnitsSelector extends React.Component {
         Promise.all([
             props.d2.models.organisationUnitLevels.list({
                 paging: false,
-                fields: 'id,level,displayName',
-                order: 'level:asc',
+                fields: "id,level,displayName",
+                order: "level:asc",
             }),
             props.d2.models.organisationUnitGroups.list({
                 paging: false,
-                fields: 'id,displayName',
+                fields: "id,displayName",
             }),
             props.d2.models.organisationUnits.list({
                 paging: false,
                 level: 1,
-                fields: 'id,displayName,path,children::isNotEmpty',
+                fields: "id,displayName,path,children::isNotEmpty",
             }),
-        ])
-        .then(([levels, groups, roots]) => {
+        ]).then(([levels, groups, roots]) => {
             this.setState({
                 levels,
                 rootWithMembers: roots.toArray()[0],
-                groups
-            })
+                groups,
+            });
         });
 
         this.handleSelectionUpdate = this.handleSelectionUpdate.bind(this);
@@ -129,12 +132,12 @@ export default class OrgUnitsSelector extends React.Component {
 
     handleChildrenLoaded(children) {
         this.setState(state => ({
-            rootWithMembers: mergeChildren(state.rootWithMembers, children)
+            rootWithMembers: mergeChildren(state.rootWithMembers, children),
         }));
     }
 
     render() {
-        const changeRoot = (currentRoot) => {
+        const changeRoot = currentRoot => {
             this.setState({ currentRoot });
         };
 
@@ -167,9 +170,11 @@ export default class OrgUnitsSelector extends React.Component {
                                         <span style={styles.ouLabel}>
                                             {this.state.currentRoot.displayName}
                                         </span>
-                                    : </div>
-                                ) : <div>{i18n.t("For all organisation units")}:</div>
-                                }
+                                        :{" "}
+                                    </div>
+                                ) : (
+                                    <div>{i18n.t("For all organisation units")}:</div>
+                                )}
 
                                 <div style={{ marginBottom: -24, marginTop: -16 }}>
                                     <OrgUnitSelectByLevel
@@ -189,7 +194,7 @@ export default class OrgUnitsSelector extends React.Component {
                                     />
                                 </div>
 
-                                <div style={{ float: 'right' }}>
+                                <div style={{ float: "right" }}>
                                     <OrgUnitSelectAll
                                         selected={this.props.selected}
                                         currentRoot={this.state.currentRoot}

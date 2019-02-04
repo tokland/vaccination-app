@@ -45,9 +45,7 @@ class LandingPage extends React.Component {
         return (
             <div className={classes.root}>
                 <Paper>
-                    <MenuList data-test="pages">
-                        {menuItems}
-                    </MenuList>
+                    <MenuList data-test="pages">{menuItems}</MenuList>
                 </Paper>
             </div>
         );

@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 import PropTypes from "prop-types";
-import Fab from '@material-ui/core/Fab'
-import { withStyles } from '@material-ui/core/styles';
-import AddIcon from '@material-ui/icons/Add';
+import Fab from "@material-ui/core/Fab";
+import { withStyles } from "@material-ui/core/styles";
+import AddIcon from "@material-ui/icons/Add";
 
 const styles = theme => ({
     fab: {
         margin: theme.spacing.unit,
-        position: 'absolute',
+        position: "absolute",
         bottom: theme.spacing.unit * 5,
         right: theme.spacing.unit * 5,
     },
@@ -16,7 +16,7 @@ const styles = theme => ({
 class ListActionBar extends React.Component {
     static propTypes = {
         onClick: PropTypes.func.isRequired,
-    }
+    };
 
     render() {
         const { classes, onClick } = this.props;

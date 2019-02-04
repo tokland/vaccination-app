@@ -2,7 +2,7 @@
 /* global Promise, Cypress, cy */
 
 import { stubFetch, externalUrl, generateFixtures, stubBackend } from "./network-fixtures";
-import _ from 'lodash';
+import _ from "lodash";
 
 const dhis2AuthEnvValue = Cypress.env("DHIS2_AUTH");
 if (!dhis2AuthEnvValue) {
@@ -17,7 +17,7 @@ const dhis2Auth = _(dhis2AuthEnvValue)
 
 Cypress.Commands.add("login", (username, _password = null) => {
     const password = _password || dhis2Auth[username];
-    console.log("LOGIN", {username, password})
+    console.log("LOGIN", { username, password });
     if (stubBackend) {
         cy.log(
             "Stubbing all backend network requests - unmatched requests will automatically fail"

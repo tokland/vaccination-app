@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import Icon from '@material-ui/core/Icon';
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import Icon from "@material-ui/core/Icon";
 
 function FormHeading({ variant, title, onBackClick }) {
     return (
@@ -13,7 +13,7 @@ function FormHeading({ variant, title, onBackClick }) {
                 <Icon color="primary">arrow_back</Icon>
             </IconButton>
 
-            <Typography variant={variant} gutterBottom style={{display: "inline-block"}}>
+            <Typography variant={variant} gutterBottom style={{ display: "inline-block" }}>
                 {title}
             </Typography>
         </div>

@@ -6,15 +6,14 @@ describe("Campaign configurator - Create", () => {
         cy.get("[data-test=create-campaign]").click();
     });
 
-    beforeEach(() => {
-    });
+    beforeEach(() => {});
 
     it("gets data from the user", () => {
         cy.contains("New vaccination campaign");
         cy.contains("For all organisation units");
 
         cy.contains("Next").click();
-        cy.contains("Select at least one organisation unit")
+        cy.contains("Select at least one organisation unit");
 
         const onlyLevel6Msg = "Only organisation units of level 6 can be selected";
 
@@ -27,13 +26,13 @@ describe("Campaign configurator - Create", () => {
         cy.contains(onlyLevel6Msg);
         expandOrgUnit("OCBA");
 
-        selectOrgUnit("ANGOLA")
+        selectOrgUnit("ANGOLA");
         cy.contains(onlyLevel6Msg);
-        expandOrgUnit("ANGOLA")
+        expandOrgUnit("ANGOLA");
 
         selectOrgUnit("HUAMBO");
         cy.contains(onlyLevel6Msg);
-        expandOrgUnit("HUAMBO")
+        expandOrgUnit("HUAMBO");
 
         selectOrgUnit("Hospital central de Huambo");
         cy.contains(onlyLevel6Msg);
@@ -45,20 +44,27 @@ describe("Campaign configurator - Create", () => {
         cy.contains("Next").click();
 
         cy.get("[data-test-current=true]").contains("Save");
-        cy.contains("Organisation Units")
-        cy.contains([
-            "MSF-OCBA-ANGOLA-HUAMBO, Malaria outbreak-Hospital central de Huambo-Emergency Room",
-            "MSF-OCBA-ANGOLA-HUAMBO, Malaria outbreak-Hospital central de Huambo-Paediatric Ward",
-        ].join(", "));
+        cy.contains("Organisation Units");
+        cy.contains(
+            [
+                "MSF-OCBA-ANGOLA-HUAMBO, Malaria outbreak-Hospital central de Huambo-Emergency Room",
+                "MSF-OCBA-ANGOLA-HUAMBO, Malaria outbreak-Hospital central de Huambo-Paediatric Ward",
+            ].join(", ")
+        );
 
         cy.contains("Save").click();
     });
 });
 
 function expandOrgUnit(label) {
-    cy.contains(label).parents(".label").prev().click();
+    cy.contains(label)
+        .parents(".label")
+        .prev()
+        .click();
 }
 
 function selectOrgUnit(label) {
-    cy.contains(label).prev().click();
+    cy.contains(label)
+        .prev()
+        .click();
 }

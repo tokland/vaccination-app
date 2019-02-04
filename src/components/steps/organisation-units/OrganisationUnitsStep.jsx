@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import OrgUnitsSelector from '../../org-units-selector/OrgUnitsSelector';
+import React from "react";
+import PropTypes from "prop-types";
+import OrgUnitsSelector from "../../org-units-selector/OrgUnitsSelector";
 import i18n from "@dhis2/d2-i18n";
-import _ from 'lodash';
-import { withFeedback, levels } from '../../feedback';
+import _ from "lodash";
+import { withFeedback, levels } from "../../feedback";
 
 class OrganisationUnitsStep extends React.Component {
     selectableLevels = [6];
@@ -15,22 +15,28 @@ class OrganisationUnitsStep extends React.Component {
         feedback: PropTypes.func.isRequired,
     };
 
-    setOrgUnits = (orgUnitsPaths) => {
+    setOrgUnits = orgUnitsPaths => {
         const orgUnits = orgUnitsPaths.map(path => ({
             id: _.last(path.split("/")),
             path,
         }));
-        const orgUnitsInSelectableLevels = orgUnits
-            .filter(ou => this.selectableLevels.includes(_(ou.path).countBy().get("/") || 0))
+        const orgUnitsInSelectableLevels = orgUnits.filter(ou =>
+            this.selectableLevels.includes(
+                _(ou.path)
+                    .countBy()
+                    .get("/") || 0
+            )
+        );
         const newCampaign = this.props.campaign.setOrganisationUnits(orgUnitsInSelectableLevels);
         const allValid = _(orgUnitsPaths).isEqual(orgUnitsInSelectableLevels.map(ou => ou.path));
         if (!allValid) {
-            const msg = i18n.t("Only organisation units of level {{levels}} can be selected",
-                {levels: this.selectableLevels.join(", ")});
+            const msg = i18n.t("Only organisation units of level {{levels}} can be selected", {
+                levels: this.selectableLevels.join(", "),
+            });
             this.props.feedback(levels.ERROR, msg);
         }
         this.props.onChange(newCampaign);
-    }
+    };
 
     render() {
         const { d2, campaign } = this.props;
@@ -41,7 +47,7 @@ class OrganisationUnitsStep extends React.Component {
                 onChange={this.setOrgUnits}
                 selected={campaign.getOrganisationUnits().map(ou => ou.path)}
             />
-        )
+        );
     }
 }
 

@@ -47,7 +47,7 @@ class App extends Component {
                     <MuiThemeProvider theme={muiTheme}>
                         <OldMuiThemeProvider>
                             <React.Fragment>
-                                <HeaderBar d2={d2}/>
+                                <HeaderBar d2={d2} />
 
                                 <div id="app" className="content">
                                     <SnackbarProvider>

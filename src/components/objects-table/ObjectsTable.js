@@ -5,7 +5,7 @@ import _ from "lodash";
 import i18n from "@dhis2/d2-i18n";
 import Checkbox from "material-ui/Checkbox/Checkbox";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import {withRouter} from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
 import SearchBox from "components/search-box/SearchBox.component";
 import Pagination from "components/data-table/Pagination.component";
@@ -17,7 +17,7 @@ import * as actions from "./actions";
 import * as DataSets from "models/DataSets";
 import SimpleCheckBox from "../forms/SimpleCheckBox";
 import { formatDateLong } from "utils/date.js";
-import { canCreate } from '../../utils/auth';
+import { canCreate } from "../../utils/auth";
 import ListActionBar from "./ListActionBar.component";
 
 function calculatePageValue(pager) {
@@ -80,11 +80,11 @@ class ObjectsTable extends React.Component {
             default:
                 console.log("TODO", key, objects);
         }
-    }
+    };
 
     newDataset = () => {
-        this.props.history.push("/campaign-configurator/new")
-    }
+        this.props.history.push("/campaign-configurator/new");
+    };
 
     _getInitialState() {
         return {
@@ -310,7 +310,7 @@ class ObjectsTable extends React.Component {
                     ) : null}
                 </div>
 
-                {canCreate(d2) && <ListActionBar onClick={this.newDataset}/>}
+                {canCreate(d2) && <ListActionBar onClick={this.newDataset} />}
             </div>
         );
     }

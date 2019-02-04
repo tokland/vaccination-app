@@ -76,15 +76,15 @@ class Wizard extends React.Component {
         const currentStep = stepsByKey[currentStepKey];
         const { nextStepKey } = this.getAdjacentSteps();
         const nextStep = stepsByKey[nextStepKey];
-        const stepChangeResponse = this.props.onStepChangeRequest(currentStep, nextStep);
+        const errorMessages = this.props.onStepChangeRequest(currentStep, nextStep);
 
-        if (stepChangeResponse.valid) {
+        if (_(errorMessages).isEmpty()) {
             this.setStep(nextStepKey);
         } else {
             if (this.props.useSnackFeedback) {
-                this.props.feedback(levels.ERROR, stepChangeResponse.messages.join("\n"));
+                this.props.feedback(levels.ERROR, errorMessages.join("\n"));
             } else {
-                this.setState({ messages: stepChangeResponse.messages });
+                this.setState({ messages: errorMessages });
             }
         }
     };

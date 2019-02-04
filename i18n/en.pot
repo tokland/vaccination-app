@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-02-04T09:47:27.092Z\n"
-"PO-Revision-Date: 2019-02-04T09:47:27.092Z\n"
+"POT-Creation-Date: 2019-02-04T12:20:21.144Z\n"
+"PO-Revision-Date: 2019-02-04T12:20:21.144Z\n"
 
 msgid "Campaign Configurator"
 msgstr ""
@@ -33,11 +33,8 @@ msgid "Save"
 msgstr ""
 
 msgid ""
-"No data has been saved at this point, press the button to create the "
-"dataset and all the metadata associated with this vaccination campaign"
-msgstr ""
-
-msgid "Select at least one organisation unit"
+"Press the button to create the dataset and all the metadata associated with "
+"this vaccination campaign"
 msgstr ""
 
 msgid "New vaccination campaign"
@@ -127,9 +124,6 @@ msgstr ""
 msgid "Search by name"
 msgstr ""
 
-msgid "Only organisation units of level {{levels}} can be selected"
-msgstr ""
-
 msgid "Loading..."
 msgstr ""
 
@@ -178,4 +172,10 @@ msgid "Organisation Unit Level"
 msgstr ""
 
 msgid "Organisation Unit Group"
+msgstr ""
+
+msgid "Select at least one organisation unit"
+msgstr ""
+
+msgid "Only organisation units of level {{levels}} can be selected"
 msgstr ""

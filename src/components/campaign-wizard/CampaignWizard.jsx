@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 import { withRouter } from "react-router";
-import _ from "lodash";
 
 import Wizard from "../wizard/Wizard";
 import FormHeading from "./FormHeading";
@@ -10,6 +9,7 @@ import Campaign from "models/campaign";
 import DbD2 from "models/db-d2";
 import OrganisationUnitsStep from "../steps/organisation-units/OrganisationUnitsStep";
 import SaveStep from "../steps/save/SaveStep";
+import { getValidationMessages } from "../../utils/validations";
 
 const stepsBaseInfo = [
     {
@@ -30,10 +30,6 @@ Only organisation units of level 6 (service) can be selected`),
 dataset and all the metadata associated with this vaccination campaign`),
     },
 ];
-
-const translations = {
-    no_organisation_units_selected: i18n.t("Select at least one organisation unit"),
-};
 
 class CampaignWizard extends React.Component {
     static propTypes = {
@@ -58,13 +54,7 @@ class CampaignWizard extends React.Component {
     };
 
     onStepChangeRequest = currentStep => {
-        const validationObj = this.state.campaign.validate();
-        const messages = _(validationObj)
-            .at(currentStep.validationKeys)
-            .compact()
-            .map(s => i18n.t(translations[s]) || s)
-            .value();
-        return { valid: _(messages).isEmpty(), messages };
+        return getValidationMessages(this.state.campaign, currentStep.validationKeys);
     };
 
     render() {

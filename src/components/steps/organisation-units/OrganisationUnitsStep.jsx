@@ -1,13 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import OrgUnitsSelector from "../../org-units-selector/OrgUnitsSelector";
-import i18n from "@dhis2/d2-i18n";
 import _ from "lodash";
 import { withFeedback, levels } from "../../feedback";
+import { getValidationMessages } from "../../../utils/validations";
 
 class OrganisationUnitsStep extends React.Component {
-    selectableLevels = [6];
-
     static propTypes = {
         d2: PropTypes.object.isRequired,
         campaign: PropTypes.object.isRequired,
@@ -20,22 +18,15 @@ class OrganisationUnitsStep extends React.Component {
             id: _.last(path.split("/")),
             path,
         }));
-        const orgUnitsInSelectableLevels = orgUnits.filter(ou =>
-            this.selectableLevels.includes(
-                _(ou.path)
-                    .countBy()
-                    .get("/") || 0
-            )
-        );
-        const newCampaign = this.props.campaign.setOrganisationUnits(orgUnitsInSelectableLevels);
-        const allValid = _(orgUnitsPaths).isEqual(orgUnitsInSelectableLevels.map(ou => ou.path));
-        if (!allValid) {
-            const msg = i18n.t("Only organisation units of level {{levels}} can be selected", {
-                levels: this.selectableLevels.join(", "),
-            });
-            this.props.feedback(levels.ERROR, msg);
+
+        const newCampaign = this.props.campaign.setOrganisationUnits(orgUnits);
+        const messages = getValidationMessages(newCampaign, ["organisationUnits"]);
+
+        if (!_(messages).isEmpty()) {
+            this.props.feedback(levels.ERROR, messages.join("\n"));
+        } else {
+            this.props.onChange(newCampaign);
         }
-        this.props.onChange(newCampaign);
     };
 
     render() {

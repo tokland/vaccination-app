@@ -6,6 +6,8 @@ export interface Data {
 }
 
 export default class Campaign {
+    selectableLevels: number[] = [6];
+
     constructor(public db: Db, public data: Data) {
     }
 
@@ -18,9 +20,18 @@ export default class Campaign {
 
     public validate() {
         const { organisationUnits } = this.data;
+
+        const allInLevels = _(organisationUnits).every(ou =>
+            _(this.selectableLevels).includes(_(ou.path).countBy().get("/") || 0));
+
         return _.pickBy({
-            organisationUnits:
-                _(organisationUnits).isEmpty() ? "no_organisation_units_selected" : null,
+            organisationUnits: _.compact([
+                allInLevels ? null : {
+                    key: "organisation_units_only_of_levels",
+                    namespace: {levels: this.selectableLevels.join("/")},
+                },
+                _(organisationUnits).isEmpty() ? {key: "no_organisation_units_selected"} : null,
+            ]),
         });
     }
 

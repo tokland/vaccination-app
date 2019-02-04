@@ -5,8 +5,7 @@ describe("Campaign configurator - List page", () => {
     });
 
     beforeEach(() => {
-        //cy.login("admin");
-        //cy.contains("Cholera Outbreak - Daily ");
+        cy.login("admin");
     });
 
     it("should have the filter only my campaign set by default", () => {
@@ -47,11 +46,9 @@ describe("Campaign configurator - List page", () => {
     });
 
     context("Unset filter only-my-campaigns", () => {
-        beforeEach(() => {
-            cy.get("[data-test='only-my-campaigns']").uncheck();
-        });
-
         it("shows list of user dataset sorted alphabetically", () => {
+            cy.get("[data-test='only-my-campaigns']").uncheck();
+
             cy.get(".data-table__rows__row").should("have.length", 10);
 
             cy.get(".data-table__rows > :nth-child(1) > :nth-child(2) span").should(
@@ -66,14 +63,12 @@ describe("Campaign configurator - List page", () => {
         });
 
         context("Use filter box", () => {
-            beforeEach(() => {
+            it("can filter datasets by name (case insensitive)", () => {
                 cy.get("[data-test='search']")
                     .clear()
                     .type("meningitis");
                 cy.wait(500);
-            });
 
-            it("can filter datasets by name (case insensitive)", () => {
                 cy.get(".data-table__rows__row").should("have.length", 2);
 
                 cy.get(".data-table__rows > :nth-child(1) > :nth-child(2) span").should(
@@ -89,12 +84,11 @@ describe("Campaign configurator - List page", () => {
         });
 
         context("Click name column", () => {
-            beforeEach(() => {
+            it("shows list of user dataset sorted alphabetically desc", () => {
                 cy.get("[data-test='search']").clear();
                 cy.contains("Name").click();
-            });
+                cy.wait(1000);
 
-            it("shows list of user dataset sorted alphabetically desc", () => {
                 cy.get(".data-table__rows__row").should("have.length", 10);
 
                 cy.get(".data-table__rows > :nth-child(1) > :nth-child(2) span").should(

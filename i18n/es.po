@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2019-02-04T09:47:27.092Z\n"
+"POT-Creation-Date: 2019-02-04T12:20:21.144Z\n"
 "PO-Revision-Date: 2018-10-25T09:02:35.143Z\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,15 +35,13 @@ msgstr ""
 msgid "Save"
 msgstr "Guardar"
 
+#, fuzzy
 msgid ""
-"No data has been saved at this point, press the button to create the dataset "
-"and all the metadata associated with this vaccination campaign"
+"Press the button to create the dataset and all the metadata associated with "
+"this vaccination campaign"
 msgstr ""
 "Pulse el botón guardar para crear el dataset y todos los metadatos asociados "
 "con esta campaña de vacunación"
-
-msgid "Select at least one organisation unit"
-msgstr "Seleccione al menos una unidad organizativa"
 
 msgid "New vaccination campaign"
 msgstr "Nueva campaña"
@@ -91,7 +89,7 @@ msgid "API link"
 msgstr "Link API"
 
 msgid "Close"
-msgstr ""
+msgstr "Cerrar"
 
 msgid "Public access"
 msgstr "Acceso público"
@@ -132,10 +130,6 @@ msgstr "Para todas las unidades organizativas"
 msgid "Search by name"
 msgstr "Buscar por nombre"
 
-msgid "Only organisation units of level {{levels}} can be selected"
-msgstr ""
-"Puedes seleccionar únicamente unidades organizativas de nivel {{levels}}"
-
 msgid "Loading..."
 msgstr "Cargando..."
 
@@ -153,7 +147,7 @@ msgstr ""
 "para guardar los datos"
 
 msgid "Help"
-msgstr ""
+msgstr "Ayuda"
 
 msgid "Previous"
 msgstr "Anterior"
@@ -187,3 +181,10 @@ msgstr "Nivel de unidad organizativa"
 
 msgid "Organisation Unit Group"
 msgstr "Grupo de unidad organizativa"
+
+msgid "Select at least one organisation unit"
+msgstr "Seleccione al menos una unidad organizativa"
+
+msgid "Only organisation units of level {{levels}} can be selected"
+msgstr ""
+"Puedes seleccionar únicamente unidades organizativas de nivel {{levels}}"

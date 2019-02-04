@@ -5,7 +5,8 @@ describe("Campaign configurator - List page", () => {
     });
 
     beforeEach(() => {
-        cy.login("admin");
+        //cy.login("admin");
+        //cy.contains("Cholera Outbreak - Daily ");
     });
 
     it("should have the filter only my campaign set by default", () => {

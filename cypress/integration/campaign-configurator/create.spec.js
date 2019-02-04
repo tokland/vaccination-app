@@ -7,16 +7,18 @@ describe("Campaign configurator - Create", () => {
     });
 
     beforeEach(() => {
-        cy.login("admin");
     });
 
     it("gets data from the user", () => {
         cy.contains("New vaccination campaign");
+        cy.contains("For all organisation units");
 
         cy.contains("Next").click();
         cy.contains("Select at least one organisation unit")
 
         const onlyLevel6Msg = "Only organisation units of level 6 can be selected";
+
+        cy.wait(1000);
 
         selectOrgUnit("MSF");
         cy.contains(onlyLevel6Msg);
@@ -45,8 +47,8 @@ describe("Campaign configurator - Create", () => {
         cy.get("[data-test-current=true]").contains("Save");
         cy.contains("Organisation Units")
         cy.contains([
-            "MSF/OCBA/ANGOLA/HUAMBO, Malaria outbreak/Hospital central de Huambo/Emergency Room",
-            "MSF/OCBA/ANGOLA/HUAMBO, Malaria outbreak/Hospital central de Huambo/Paediatric Ward",
+            "MSF-OCBA-ANGOLA-HUAMBO, Malaria outbreak-Hospital central de Huambo-Emergency Room",
+            "MSF-OCBA-ANGOLA-HUAMBO, Malaria outbreak-Hospital central de Huambo-Paediatric Ward",
         ].join(", "));
 
         cy.contains("Save").click();

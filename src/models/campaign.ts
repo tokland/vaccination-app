@@ -32,7 +32,7 @@ export default class Campaign {
         const ids = this.data.organisationUnits.map(ou => ou.id);
         const {pager, objects} = await this.db.getOrganisationUnitsFromIds(ids);
         const names = objects.map(ou =>
-            (ou.ancestors || []).map(oua => oua.displayName).concat([ou.displayName]).join("/")
+            (ou.ancestors || []).map(oua => oua.displayName).concat([ou.displayName]).join("-")
         );
         return {pager, objects: names};
     }

@@ -16,13 +16,18 @@ const stepsBaseInfo = [
         key: "organisation-units",
         label: i18n.t("Organisation Units"),
         component: OrganisationUnitsStep,
-        validationKeys: ["organisationUnits"]
+        validationKeys: ["organisationUnits"],
+        help: i18n.t(`Select organisation units assigned to this campaign.
+At least one must be selected.
+Only organisation units of level 6 (service) can be selected`),
     },
     {
         key: "save",
         label: i18n.t("Save"),
         component: SaveStep,
-        validationKeys: []
+        validationKeys: [],
+        help: i18n.t(`No data has been saved at this point, press the button to create the \
+dataset and all the metadata associated with this vaccination campaign`),
     },
 ];
 

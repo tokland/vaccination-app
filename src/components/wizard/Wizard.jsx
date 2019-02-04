@@ -9,7 +9,10 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
 import Button from '@material-ui/core/Button';
+import { IconButton } from '@material-ui/core';
+import Icon from '@material-ui/core/Icon';
 import { withFeedback, levels } from '../feedback';
+import DialogHandler from '../dialog-handler/DialogHandler';
 
 const styles = theme => ({
     root: {
@@ -31,9 +34,6 @@ const styles = theme => ({
         padding: 0,
         listStyleType: "none",
         color: "red",
-    },
-    current: {
-        //backgroundColor: "#EEE",
     },
 });
 
@@ -114,6 +114,22 @@ class Wizard extends React.Component {
         this.setStep(stepKey);
     });
 
+    renderHelp = ({step}) => {
+        const Button = ({onClick}) => (
+            <IconButton tooltip={i18n.t("Help")} onClick={onClick}>
+                <Icon color="primary">help</Icon>
+            </IconButton>
+        );
+
+        return (
+            <DialogHandler
+                buttonComponent={Button}
+                title={`${step.label} - ${i18n.t("Help")}`}
+                contents={step.help}
+            />
+        );
+    };
+
     render() {
         const { classes, steps, useSnackFeedback } = this.props;
         const { currentStepKey, messages } = this.state;
@@ -122,6 +138,7 @@ class Wizard extends React.Component {
         const currentStep = steps[currentStepIndex];
         const {prevStepKey, nextStepKey} = this.getAdjacentSteps();
         const NavigationButton = this.renderNavigationButton.bind(this);
+        const Help = this.renderHelp;
 
         return (
             <div className={classes.root}>
@@ -130,7 +147,6 @@ class Wizard extends React.Component {
                         <Step key={step.key}>
                             <StepButton
                                 key={step.key}
-                                className={currentStep === step ? classes.current : ""}
                                 data-test-current={currentStep === step}
                                 onClick={(this.onStepClicked(step.key))}
                             >
@@ -152,6 +168,8 @@ class Wizard extends React.Component {
                         onClick={this.nextStep}
                         label={i18n.t("Next") + " →"}
                     />
+
+                    {currentStep.help ? <Help step={currentStep} /> : null}
                 </div>
 
                 {!useSnackFeedback && messages.length > 0 &&

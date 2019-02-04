@@ -10,9 +10,11 @@ export default class DbD2 implements Db {
         this.api = d2.Api.getApi();
     }
 
-    public async getOrganisationUnitsFromIds(ids: string[]): Promise<PaginatedObjects<OrganisationUnit>> {
+    public async getOrganisationUnitsFromIds(ids: string[]):
+            Promise<PaginatedObjects<OrganisationUnit>> {
         const { pager, organisationUnits } = await this.api.get("/organisationUnits", {
             paging: true,
+            pageSize: 10,
             filter: [`id:in:[${ids.join(',')}]`],
             fields: ["id", "displayName", "path", "level", "ancestors[id,displayName,path,level]"],
         });

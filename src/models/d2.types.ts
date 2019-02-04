@@ -5,9 +5,10 @@ export interface D2 {
 }
 
 export interface Params {
-    paging?: boolean,
-    filter?: string[],
-    fields?: string[],
+    paging?: boolean;
+    pageSize?: number;
+    filter?: string[];
+    fields?: string[];
 }
 
 export interface D2Api {

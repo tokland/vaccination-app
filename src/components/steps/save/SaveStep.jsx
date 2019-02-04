@@ -39,9 +39,13 @@ class SaveStep extends React.Component {
             const othersCount = pager.total - objects.length;
             const names = _(objects).sortBy().join(", ") || i18n.t("[None]");
             if (othersCount > 0) {
-                return i18n.t("{{names}} and {{othersCount}} other(s)", {names, othersCount});
+                return i18n.t("[{{total}}] {{names}} and {{othersCount}} other(s)", {
+                    total: pager.total,
+                    names,
+                    othersCount,
+                });
             } else {
-                return names;
+                return `[${pager.total}] ${names}`;
             }
         }
     }

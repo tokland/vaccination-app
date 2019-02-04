@@ -841,7 +841,7 @@
     lodash "^4.17.10"
     material-ui "^0.20.0"
 
-"@dhis2/d2-ui-header-bar@^5.1.0":
+"@dhis2/d2-ui-header-bar@5.1.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@dhis2/d2-ui-header-bar/-/d2-ui-header-bar-5.1.0.tgz#a8e9047ab9bac65ea2309c5a99794cf0315a3b98"
   integrity sha512-NnM1ISgYGtPAEfRrOUWjrlPlEdwqxxIGPpuxzb1m8PcIKbSvPKqXGE48/+y1Ez+ajTWA5NPVaAIWDFZyKtJt1g==

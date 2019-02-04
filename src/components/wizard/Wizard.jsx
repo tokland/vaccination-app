@@ -28,7 +28,7 @@ const styles = theme => ({
     },
     contents: {
         margin: 10,
-        padding: 10,
+        padding: 0,
     },
     messages: {
         padding: 0,

@@ -26,7 +26,7 @@ Only organisation units of level 6 (service) can be selected`),
         label: i18n.t("Save"),
         component: SaveStep,
         validationKeys: [],
-        help: i18n.t(`No data has been saved at this point, press the button to create the \
+        help: i18n.t(`Press the button to create the \
 dataset and all the metadata associated with this vaccination campaign`),
     },
 ];

@@ -32,7 +32,6 @@ describe("Campaign configurator - List page", () => {
         cy.contains("Cholera Outbreak - Daily ")
             .first()
             .trigger("contextmenu");
-        cy.wait(1000);
 
         cy.contains("Details");
         cy.contains("Edit");
@@ -64,11 +63,13 @@ describe("Campaign configurator - List page", () => {
 
         context("Use filter box", () => {
             it("can filter datasets by name (case insensitive)", () => {
+                cy.server()
+                    .route("GET", "/api/dataSets**")
+                    .as("getDataSets");
                 cy.get("[data-test='search']")
                     .clear()
                     .type("meningitis");
-                cy.wait(500);
-
+                cy.wait("@getDataSets");
                 cy.get(".data-table__rows__row").should("have.length", 2);
 
                 cy.get(".data-table__rows > :nth-child(1) > :nth-child(2) span").should(
@@ -86,8 +87,11 @@ describe("Campaign configurator - List page", () => {
         context("Click name column", () => {
             it("shows list of user dataset sorted alphabetically desc", () => {
                 cy.get("[data-test='search']").clear();
+                cy.server()
+                    .route("GET", "/api/dataSets*")
+                    .as("getDataSets");
                 cy.contains("Name").click();
-                cy.wait(1000);
+                cy.wait("@getDataSets");
 
                 cy.get(".data-table__rows__row").should("have.length", 10);
 

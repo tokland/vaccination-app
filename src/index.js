@@ -4,6 +4,7 @@ import { init, config, getUserSettings, getManifest } from "d2";
 import "font-awesome/css/font-awesome.min.css";
 import { BrowserRouter } from "react-router-dom";
 import i18n from "@dhis2/d2-i18n";
+import moment from "moment";
 
 import App from "./components/app/App";
 
@@ -36,6 +37,7 @@ function configI18n(userSettings) {
     document.documentElement.setAttribute("dir", isLangRTL(uiLocale) ? "rtl" : "ltr");
 
     i18n.changeLanguage(uiLocale);
+    moment.locale(uiLocale);
 }
 
 async function getBaseUrl() {

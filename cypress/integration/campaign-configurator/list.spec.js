@@ -1,7 +1,8 @@
 describe("Campaign configurator - List page", () => {
     beforeEach(() => {
         cy.login("admin");
-        cy.loadPage("/campaign-configurator");
+        cy.loadPage();
+        cy.contains("Campaign Configurator").click();
     });
 
     it("should have the filter only my campaign set by default", () => {

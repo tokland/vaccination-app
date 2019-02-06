@@ -17,7 +17,6 @@ const dhis2Auth = _(dhis2AuthEnvValue)
 
 Cypress.Commands.add("login", (username, _password = null) => {
     const password = _password || dhis2Auth[username];
-    console.log("LOGIN", { username, password });
     if (stubBackend) {
         cy.log(
             "Stubbing all backend network requests - unmatched requests will automatically fail"

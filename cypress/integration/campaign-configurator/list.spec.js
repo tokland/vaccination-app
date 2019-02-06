@@ -1,11 +1,7 @@
 describe("Campaign configurator - List page", () => {
-    before(() => {
-        cy.login("admin");
-        cy.loadPage("/campaign-configurator");
-    });
-
     beforeEach(() => {
         cy.login("admin");
+        cy.loadPage("/campaign-configurator");
     });
 
     it("should have the filter only my campaign set by default", () => {
@@ -63,6 +59,8 @@ describe("Campaign configurator - List page", () => {
 
         context("Use filter box", () => {
             it("can filter datasets by name (case insensitive)", () => {
+                cy.get("[data-test='only-my-campaigns']").uncheck();
+
                 cy.server()
                     .route("GET", "/api/dataSets**")
                     .as("getDataSets");
@@ -97,7 +95,7 @@ describe("Campaign configurator - List page", () => {
 
                 cy.get(".data-table__rows > :nth-child(1) > :nth-child(2) span").should(
                     "have.text",
-                    "Viral Haemorrhagic Fever - Weekly"
+                    "Vaccination Women - Weekly"
                 );
             });
         });

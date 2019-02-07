@@ -4,32 +4,39 @@ import moment from "moment";
 import MomentUtils from "@date-io/moment";
 import { MuiPickersUtilsProvider, DatePicker as MuiDatePicker } from "material-ui-pickers";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
-import grey from "@material-ui/core/colors/grey";
 import cyan from "@material-ui/core/colors/cyan";
 import { muiTheme } from "themes/dhis2.theme";
+
+const grey = "#0000004d";
 
 const materialTheme = createMuiTheme({
     ...muiTheme,
     overrides: {
         MuiFormLabel: {
             root: {
-                color: grey["500"],
+                color: grey,
             },
         },
         MuiInput: {
+            root: {
+                color: grey,
+            },
+            input: {
+                color: "#000000de",
+            },
             underline: {
-                color: grey["500"],
+                color: grey,
                 "&&&&:hover:before": {
-                    borderBottom: `1px solid ${grey["500"]}`,
+                    borderBottom: `3px solid ${cyan}`,
                 },
                 "&:hover:not($disabled):before": {
-                    borderBottom: `1px solid ${grey["500"]}`,
+                    borderBottom: `1px solid ${grey}`,
                 },
                 "&:after": {
-                    borderBottom: `3px solid ${cyan["500"]}`,
+                    borderBottom: `1px solid ${cyan}`,
                 },
                 "&:before": {
-                    borderBottom: `1px solid ${grey["500"]}`,
+                    borderBottom: `1px solid ${grey}`,
                 },
             },
         },
